@@ -8,7 +8,7 @@ prototypes and libraries for the hash table class
 #ifndef HASH_TABLE_H
 #define HASH_TABLE_H
 
-#include "linkedList.cpp"
+#include "linkedlist.cpp"
 #include <iostream>
 
 #define HASHTABLESIZE 15
