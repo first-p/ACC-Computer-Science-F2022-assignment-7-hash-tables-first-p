@@ -8,12 +8,20 @@ hash table object
 
 #include "hashtable.h"
 
-HashTable::HashTable(){
-
+HashTable::HashTable() {
+    count = 0;
+    for (int i = 0; i < HASHTABLESIZE; i++) {
+        hashtable[i] = nullptr;
+    }
 }
 
-HashTable::~HashTable(){
-
+HashTable::~HashTable() {
+    for (int i = 0; i < HASHTABLESIZE; i++) {
+        if (hashtable[i]) {
+            delete hashtable[i];
+            hashtable[i] = nullptr;
+        }
+    }
 }
 
 bool HashTable::insertEntry(int id, string *data){
@@ -37,7 +45,7 @@ void HashTable::printTable(){
 }
 
 
-int HashTable::hast(int id){
+int HashTable::hash(int id){
 
 }
 
