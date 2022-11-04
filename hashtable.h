@@ -11,8 +11,12 @@ prototypes and libraries for the hash table class
 #include "linkedList.cpp"
 #include <iostream>
 
+#define HASHTABLESIZE 15
+
 using std::cout;
 using std::endl;
+
+
 
 class HashTable {
 public:
