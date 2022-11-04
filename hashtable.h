@@ -30,6 +30,7 @@ public:
 
 private:
   int hast(int);
+  int count;
 };
 
 #endif // #HASH_TABLE_H
