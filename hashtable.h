@@ -29,9 +29,9 @@ public:
   void printTable();
 
 private:
-  int hast(int);
+  int hash(int);
   int count;
-  LinkedList hashtable[HASHTABLESIZE];
+  LinkedList *hashtable[HASHTABLESIZE];
 };
 
 #endif // #HASH_TABLE_H
