@@ -46,7 +46,7 @@ void HashTable::printTable(){
 
 
 int HashTable::hash(int id){
-
+    return id % HASHTABLESIZE;
 }
 
 
