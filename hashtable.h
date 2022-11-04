@@ -31,6 +31,7 @@ public:
 private:
   int hast(int);
   int count;
+  LinkedList hashtable[HASHTABLESIZE];
 };
 
 #endif // #HASH_TABLE_H
