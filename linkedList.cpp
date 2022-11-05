@@ -192,7 +192,7 @@ void LinkedList::printList(bool backward) {
   int count = 0;
   if (!backward) {
     while (current) {
-      cout << count << ": " << current->data.id << " : " << current->data.data << endl;
+      cout << count << ": " << current->data.id << " : " << current->data.data << ", ";
       current = current->next;
       count++;
     }
