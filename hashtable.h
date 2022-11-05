@@ -18,10 +18,10 @@ using std::endl;
 
 
 
-class HashTable {
+class Hashtable {
 public:
-  HashTable();
-  ~HashTable();
+  Hashtable();
+  ~Hashtable();
   bool insertEntry(int, string*);
   string getData(int);
   bool removeEntry(int);

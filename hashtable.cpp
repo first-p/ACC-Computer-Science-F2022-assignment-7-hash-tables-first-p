@@ -8,44 +8,68 @@ hash table object
 
 #include "hashtable.h"
 
-HashTable::HashTable() {
+Hashtable::Hashtable() {
     count = 0;
     for (int i = 0; i < HASHTABLESIZE; i++) {
-        hashtable[i] = nullptr;
+        hashtable[i] = NULL;
     }
 }
 
-HashTable::~HashTable() {
+Hashtable::~Hashtable() {
     for (int i = 0; i < HASHTABLESIZE; i++) {
         if (hashtable[i]) {
             delete hashtable[i];
-            hashtable[i] = nullptr;
+            hashtable[i] = NULL;
         }
     }
 }
 
-bool HashTable::insertEntry(int id, string *data){
+bool Hashtable::insertEntry(int id, string *data){
+    bool added = false; 
+    int position = hash(id);
 
+    if (id > 0 && *data != ""){
+        added = hashtable[position]->addNode(id, data);
+        count++;
+    }
+    return added;
 }
-string HashTable::getData(int id){
+string Hashtable::getData(int id){
+    int position = hash(id);
+    Data *emptyObj;
+    hashtable[position]->getNode(id, emptyObj);
 
-}
-
-
-bool HashTable::removeEntry(int id){
-
-}
-
-int HashTable::getCount(){
-
-}
-
-void HashTable::printTable(){
-
+    return emptyObj->data;
 }
 
 
-int HashTable::hash(int id){
+bool Hashtable::removeEntry(int id){
+    bool removed = false; 
+    int position = hash(id);
+
+    removed = hashtable[position]->deleteNode(id);
+    count --;
+
+    return removed;
+}
+
+int Hashtable::getCount(){
+    return count;
+}
+
+void Hashtable::printTable(){
+    for (int i = 0; i < HASHTABLESIZE; i++){
+        if (hashtable[i]){
+            cout << "Entry " << i << " : " << hashtable[i]->printList(false) << endl;
+        }
+        else{
+            cout << "Entry " << i << " : " << "EMPTY" << endl;
+        }
+    }
+}
+
+
+int Hashtable::hash(int id){
     return id % HASHTABLESIZE;
 }
 
