@@ -1,7 +1,7 @@
 /*********************
 Name: Fred Butoma
 Assignment 6
-Purpose: linkedlist.cpp is the linked list class and 
+Purpose: linkedlist.cpp is the linked list class and
 has all the operations required to manipulate a
 classic doubly linked list
 *********************/
@@ -11,7 +11,7 @@ classic doubly linked list
 
 // constructor
 LinkedList::LinkedList() {
-  head = NULL; 
+  head = NULL;
 }
 
 // destructor
@@ -25,7 +25,7 @@ LinkedList::~LinkedList() {
 bool LinkedList::addNode(int id, string *data) {
   bool added = false;
   Node *newNode = createNode(id, data);
-  
+
   Data empty;
   bool duplicate = getNode(id, &empty);
   // bool duplicate = getNode(id, empty);
@@ -38,7 +38,7 @@ bool LinkedList::addNode(int id, string *data) {
   // }
 
   if (newNode && !duplicate){
-    if (id > 0 && *data != "") {
+    if (id > -1 && *data != "") {
     //creates first head node in list
     if (head == NULL){
       head = newNode;
@@ -54,9 +54,9 @@ bool LinkedList::addNode(int id, string *data) {
         else{
           Node *current = head;
           while (!duplicate && id > current->data.id && current->next != NULL) {
-            
+
             if (id == current->data.id){
-               duplicate = true; 
+               duplicate = true;
                cout << "found duplicate" << endl;
             }
             else {
@@ -71,10 +71,10 @@ bool LinkedList::addNode(int id, string *data) {
             addMiddle(newNode, current);
             added = true;
             // cout << "used addMiddle()" << endl;
-            
+
           }
         // add node after the last existing node (new tail)
-          else if(current->next == NULL){ 
+          else if(current->next == NULL){
               addTail(newNode, current);
               added = true;
           }
@@ -103,7 +103,7 @@ bool LinkedList::addHead(Node *newNode) {
 bool LinkedList::addMiddle(Node *newNode, Node *current) {
   newNode->prev = current->prev;
   newNode->next = current;
-  current->prev->next = newNode; 
+  current->prev->next = newNode;
   current->prev = newNode;
   return true;
 }
@@ -136,13 +136,13 @@ bool LinkedList::deleteNode(int id) {
                 delLast(current);
                 deleted = true;
             }
-        else if (id == current->data.id && current->prev == NULL){         
+        else if (id == current->data.id && current->prev == NULL){
             delHead(current);
             current = NULL;
             deleted = true;
-            
+
         }
-        
+
         else if (id == current->data.id && current->next == NULL){
             delTail(current);
             current = NULL;
@@ -153,13 +153,13 @@ bool LinkedList::deleteNode(int id) {
             current = NULL;
             deleted = true;
         }
-  
+
         else {
             current = current -> next;
         }
     }
     return deleted;
-}  
+}
 
 bool LinkedList::delHead(Node *current){
     current->next->prev = NULL;
@@ -210,8 +210,8 @@ bool LinkedList::clearList() {
             cleared = true;
         }
     }
-    return cleared; 
-}  
+    return cleared;
+}
 ////////////////////////
 ////// getters/////////
 //////////////////////
@@ -242,7 +242,7 @@ void LinkedList::printList(bool backward) {
   int count = 0;
   if (!backward) {
     //this is the print function used in the hashtable print list for each linked list
-    while (current) { 
+    while (current) {
       cout << current->data.id << " -> ";
       current = current->next;
     }
@@ -298,4 +298,3 @@ bool LinkedList::exists(int id) {
   }
   return exists;
 }
-
