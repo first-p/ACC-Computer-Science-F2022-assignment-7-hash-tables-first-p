@@ -7,7 +7,7 @@ hash table object
 *********************/
 
 #include "hashtable.h"
-#include "linkedlist.h"
+#include "linkedList.h"
 
 Hashtable::Hashtable() {
     count = 0;

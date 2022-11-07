@@ -6,7 +6,7 @@ has all the operations required to manipulate a
 classic doubly linked list
 *********************/
 
-#include "linkedlist.h"
+#include "linkedList.h"
 #include "data.h"
 
 // constructor
