@@ -51,7 +51,28 @@ int main() {
    */
 
   // create your hash table object here
+  cout << "created a hashtable object" << endl;
   Hashtable h1;
+  string str = "data";
+
+  cout << "\n\n printing empty hash table" << endl;
+  h1.printTable();
+
+  // cout << "printing one of the linked lists" << endl;
+  // h1.printList();
+
+  cout << "\n\n adding nodes to hashtable" << endl;
+  for (int i= 0 ; i < testdatasize; i++){
+    h1.insertEntry(ids[i],&strs[i]);
+  }
+  h1.printTable();
+
+  // cout << "adding node" << endl;
+  // h1.hashtable[0].addNode(22,&str);
+  // cout << "filling hashtable with testdata" << endl;
+  // for (int i = 0 ; i < testdatasize; i++){
+  //   h1.insertEntry(ids[i],&strs[i]);
+  // }
   // h1.printTable();
   
 
