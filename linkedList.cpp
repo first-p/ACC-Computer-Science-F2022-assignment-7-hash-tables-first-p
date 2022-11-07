@@ -1,89 +1,133 @@
 /*********************
- Name: Fred Butoma
- Assignment 7
- Purpose: linkedlist.cpp is the linked list class and 
- has all the operations required to manipulate a
- singly linked list
- *********************/
+Name: Fred Butoma
+Assignment 6
+Purpose: linkedlist.cpp is the linked list class and 
+has all the operations required to manipulate a
+classic doubly linked list
+*********************/
 
- #include "linkedlist.h"
- #include "data.h"
+#include "linkedlist.h"
+#include "data.h"
+
 // constructor
 LinkedList::LinkedList() {
-  head = new Node;
   head = NULL; 
 }
+
 // destructor
 LinkedList::~LinkedList() {
   clearList();
 }
-/////////////////
-// setters//////
-///////////////
+////////////////////////
+////// setters/////////
+//////////////////////
+
 bool LinkedList::addNode(int id, string *data) {
   bool added = false;
-  if (id > 0 && *data != "") {
-    //created head node (first node)
+  Node *newNode = createNode(id, data);
+  
+  Data empty;
+  bool duplicate = getNode(id, &empty);
+  // bool duplicate = getNode(id, empty);
+
+  // if (duplicate){
+  //     delete newNode;
+  //     newNode = NULL;
+  //     return added;
+  //     cout << "caught the duplicate" << endl;
+  // }
+
+  if (newNode && !duplicate){
+    if (id > 0 && *data != "") {
+    //creates first head node in list
     if (head == NULL){
-      Node *newNode = createNode(id, data);
-      newNode->next = NULL;
-      newNode->prev = NULL;
       head = newNode;
       added = true;
-      }
-    Node *current = head;
-     //adds a node at front of the list (becomes new head)
-    if (id < current->data.id ){
-      addHead(id, data);
-      added= true;
     }
-    // finds the place in ordered list for new node to be added
-    while (current->next != NULL && id > current->data.id && id != current->data.id) {
-      current = current-> next;
-    }
-     // add new node in between two existing nodes
-    if (id < current->data.id && id > current->prev->data.id) {
-      addMiddle(id, data, current);
-      added = true;
-    }
-    // add node at the after the last existing node (new tail)
-    else if (id > current->data.id) {
-      addTail(id, data, current);
-      added = true;
-    
+    else {
+      //adds a node at front of the list (becomes new head)
+        if (id < head->data.id){
+          addHead(newNode);
+          added= true;
+        }
+        // if !first node and !head node, finds the place in ordered list to link  a new node
+        else{
+          Node *current = head;
+          while (!duplicate && id > current->data.id && current->next != NULL) {
+            
+            if (id == current->data.id){
+               duplicate = true; 
+               cout << "found duplicate" << endl;
+            }
+            else {
+              current = current-> next;
+            }
+          }
+          // while (id != current->data.id && id > current->data.id && current->next != NULL) {
+          //   current = current-> next;
+          // }
+        // add new node in between two existing nodes
+          if (current->next != NULL){
+            addMiddle(newNode, current);
+            added = true;
+            // cout << "used addMiddle()" << endl;
+            
+          }
+        // add node after the last existing node (new tail)
+          else if(current->next == NULL){ 
+              addTail(newNode, current);
+              added = true;
+          }
+
+        }
     }
   }
-  return added;
-}
-bool LinkedList::addHead(int id, string *data) {
-  Node *newNode = createNode(id, data);
+  }
+  //if the id is a duplicate
+  if (duplicate){
+      delete newNode;
+      newNode = NULL;
+
+    }
+    return added;
+  }
+
+
+bool LinkedList::addHead(Node *newNode) {
   head->prev = newNode;
   newNode->next = head;
   head = newNode;
   return true;
 }
-bool LinkedList::addMiddle(int id, string *data, Node *current) {
-  Node *newNode = createNode(id, data);
+
+bool LinkedList::addMiddle(Node *newNode, Node *current) {
   newNode->prev = current->prev;
   newNode->next = current;
   current->prev->next = newNode; 
   current->prev = newNode;
   return true;
 }
-bool LinkedList::addTail(int id, string *data, Node *current) {
-  Node *newNode = createNode(id, data);
+
+bool LinkedList::addTail(Node *newNode, Node *current) {
   newNode->prev = current;
   current->next = newNode;
   return true;
 }
+
 Node* LinkedList::createNode(int id, string *data) {
   Node *newNode = new Node;
-  newNode->data.id = id;
-  newNode->data.data = *data;
-  newNode->next = NULL;
-  newNode->prev = NULL;
-  return newNode;
+  if (newNode){
+    newNode->data.id = id;
+    newNode->data.data = *data;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+    return newNode;
+  }
+  else {
+    return NULL;
+  }
 }
+
 bool LinkedList::deleteNode(int id) {
   bool deleted = false;
   Node *current = head;
@@ -116,6 +160,7 @@ bool LinkedList::deleteNode(int id) {
     }
     return deleted;
 }  
+
 bool LinkedList::delHead(Node *current){
     current->next->prev = NULL;
     head = current->next;
@@ -167,9 +212,9 @@ bool LinkedList::clearList() {
     }
     return cleared; 
 }  
-/////////////////////
-////// getters//////
-///////////////////
+////////////////////////
+////// getters/////////
+//////////////////////
 bool LinkedList::getNode(int id, Data *emptyObj) {
   bool got = false;
   Node *current = head;
@@ -184,15 +229,20 @@ bool LinkedList::getNode(int id, Data *emptyObj) {
         current = current -> next;
     }
   }
+  if (!got){
+     emptyObj->id = -1;
+     emptyObj->data = "";
+  }
   return got;
 }
+
 void LinkedList::printList(bool backward) {
   Node *current = new Node;
   current = head;
   int count = 0;
   if (!backward) {
     while (current) {
-      cout << count << ": " << current->data.id << " : " << current->data.data << ", ";
+      cout << count << ": " << current->data.id << " : " << current->data.data << endl;
       current = current->next;
       count++;
     }
@@ -224,6 +274,7 @@ int LinkedList::getCount() {
     }
   return count;
 }
+
 bool LinkedList::exists(int id) {
   bool exists = false;
   Node *current = head;
@@ -238,3 +289,4 @@ bool LinkedList::exists(int id) {
   }
   return exists;
 }
+
