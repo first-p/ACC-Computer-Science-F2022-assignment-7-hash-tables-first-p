@@ -28,11 +28,21 @@ Hashtable::~Hashtable() {
 
 bool Hashtable::insertEntry(int id, string *data){
     bool added = false; 
-    int position = hash(id);
 
     if (id > 0 && *data != ""){
-        added = hashtable[position]->addNode(id, data);
-        count++;
+         int position = hash(id);
+
+         if (!hashtable[position]){
+            hashtable[position] = new LinkedList;
+            hashtable[position]->addNode(id, data);
+            added = true;
+            count++;
+         }
+         else{
+            hashtable[position]->addNode(id, data);
+            added = true;
+            count++;
+         }
     }
     return added;
 }
@@ -62,13 +72,17 @@ int Hashtable::getCount(){
 void Hashtable::printTable(){
     for (int i = 0; i < HASHTABLESIZE; i++){
         if (hashtable[i]){
-            cout << "Entry " << i << " : " << "hashtable[i]->printList(false)" << endl;
+            cout << "Entry " << i << " : ";
+            hashtable[i]->printList(false); 
+            cout << "|" << endl;
+            
         }
         else{
             cout << "Entry " << i << " : " << "EMPTY" << endl;
         }
     }
 }
+
 
 
 int Hashtable::hash(int id){

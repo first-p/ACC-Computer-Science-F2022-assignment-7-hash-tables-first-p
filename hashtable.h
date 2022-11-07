@@ -30,6 +30,9 @@ public:
   int getCount();
   void printTable();
 
+
+  
+
 private:
   int hash(int);
   int count;
