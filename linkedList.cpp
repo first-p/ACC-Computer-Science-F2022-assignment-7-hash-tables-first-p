@@ -241,10 +241,10 @@ void LinkedList::printList(bool backward) {
   current = head;
   int count = 0;
   if (!backward) {
-    while (current) {
-      cout << count << ": " << current->data.id << " : " << current->data.data << endl;
+    //this is the print function used in the hashtable print list for each linked list
+    while (current) { 
+      cout << "[" << current->data.id << " : " << current->data.data << "] -> ";
       current = current->next;
-      count++;
     }
   } else if (backward) {
     current = head;
