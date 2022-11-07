@@ -275,6 +275,15 @@ int LinkedList::getCount() {
   return count;
 }
 
+bool LinkedList::isEmpty(){
+  bool empty = false;
+  Node *current = head;
+  if (current == NULL){
+    empty = true;
+  }
+  return empty;
+}
+
 bool LinkedList::exists(int id) {
   bool exists = false;
   Node *current = head;

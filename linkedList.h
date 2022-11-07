@@ -28,6 +28,7 @@ public:
   void printList(bool = false);
   int getCount();
   bool exists(int);
+  bool isEmpty();
 
   // setters
   bool addNode(int, string *);
