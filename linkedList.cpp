@@ -38,7 +38,7 @@ bool LinkedList::addNode(int id, string *data) {
   // }
 
   if (newNode && !duplicate){
-    if (id > -1 && *data != "") {
+    if (id > 0 && *data != "") {
     //creates first head node in list
     if (head == NULL){
       head = newNode;
