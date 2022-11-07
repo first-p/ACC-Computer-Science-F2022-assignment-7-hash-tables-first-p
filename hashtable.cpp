@@ -12,9 +12,9 @@ hash table object
 Hashtable::Hashtable() {
     count = 0;
     cout << "inside constructor" << endl;
-    // for (int i = 0; i < HASHTABLESIZE; i++) {
-    //     hashtable[i] = NULL;
-    // }
+    for (int i = 0; i < HASHTABLESIZE; i++) {
+        hashtable[i] = NULL;
+    }
 }
 
 Hashtable::~Hashtable() {
