@@ -243,7 +243,7 @@ void LinkedList::printList(bool backward) {
   if (!backward) {
     //this is the print function used in the hashtable print list for each linked list
     while (current) { 
-      cout << "[" << current->data.id << " : " << current->data.data << "] -> ";
+      cout << "[" << current->data.id << "] -> ";
       current = current->next;
     }
   } else if (backward) {
