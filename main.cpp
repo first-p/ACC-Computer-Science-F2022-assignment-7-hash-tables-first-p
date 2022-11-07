@@ -51,6 +51,10 @@ int main() {
    */
 
   // create your hash table object here
+  Hashtable h1;
+  // h1.printTable();
+  
+
 
   // show it is empty by calling getCount and printTable
 
@@ -59,6 +63,9 @@ int main() {
   // continue using and testing your table, add and remove data,
   // do whatever it takes to full test your object and prove it
   // is robust and can handle all use cases.
+  ////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////
+  
 
   return 0;
 }

@@ -7,12 +7,14 @@ hash table object
 *********************/
 
 #include "hashtable.h"
+#include "linkedlist.h"
 
 Hashtable::Hashtable() {
     count = 0;
-    for (int i = 0; i < HASHTABLESIZE; i++) {
-        hashtable[i] = NULL;
-    }
+    cout << "inside constructor" << endl;
+    // for (int i = 0; i < HASHTABLESIZE; i++) {
+    //     hashtable[i] = NULL;
+    // }
 }
 
 Hashtable::~Hashtable() {
@@ -60,7 +62,7 @@ int Hashtable::getCount(){
 void Hashtable::printTable(){
     for (int i = 0; i < HASHTABLESIZE; i++){
         if (hashtable[i]){
-            cout << "Entry " << i << " : " << hashtable[i]->printList(false) << endl;
+            cout << "Entry " << i << " : " << "hashtable[i]->printList(false)" << endl;
         }
         else{
             cout << "Entry " << i << " : " << "EMPTY" << endl;

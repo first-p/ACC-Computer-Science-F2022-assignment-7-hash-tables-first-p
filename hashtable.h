@@ -8,7 +8,7 @@ prototypes and libraries for the hash table class
 #ifndef HASH_TABLE_H
 #define HASH_TABLE_H
 
-#include "linkedlist.cpp"
+#include "linkedlist.h"
 #include <iostream>
 
 #define HASHTABLESIZE 15
@@ -19,9 +19,11 @@ using std::endl;
 
 
 class Hashtable {
+
 public:
   Hashtable();
   ~Hashtable();
+  
   bool insertEntry(int, string*);
   string getData(int);
   bool removeEntry(int);
