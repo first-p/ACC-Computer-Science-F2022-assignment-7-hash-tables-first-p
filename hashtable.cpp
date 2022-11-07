@@ -27,9 +27,9 @@ Hashtable::~Hashtable() {
 }
 
 bool Hashtable::insertEntry(int id, string *data){
-    bool added = false; 
+    bool added = false;
 
-    if (id > 0 && *data != ""){
+    if (id > -1 && *data != ""){
          int position = hash(id);
 
          if (!hashtable[position]){
@@ -51,17 +51,26 @@ bool Hashtable::insertEntry(int id, string *data){
     return added;
 }
 string Hashtable::getData(int id){
-    int position = hash(id);
-    Data *emptyObj;
-    hashtable[position]->getNode(id, emptyObj);
+   Data emptyObj;
+    if (id > -1) {
+        int position = hash(id);
+        
 
-    return emptyObj->data;
+        if (hashtable[position]){
+
+            bool success = hashtable[position]->getNode(id, &emptyObj);
+        }
+    }// make sure id is not negative!!
+
+
+
+    return emptyObj.data;
 }
 
 
 bool Hashtable::removeEntry(int id){
-    bool removed = false; 
-    if (id > 0){
+    bool removed = false;
+    if (id > -1){
         int position = hash(id);
         if (hashtable[position]){
             bool success = hashtable[position]->deleteNode(id);
@@ -69,13 +78,13 @@ bool Hashtable::removeEntry(int id){
                 removed = true;
                 count --;
             }
-            
+
             if (hashtable[position]->isEmpty()){
                 hashtable[position] == NULL;
-                
+
             }
         }
-       
+
     }
 
     return removed;
@@ -89,12 +98,12 @@ void Hashtable::printTable(){
     for (int i = 0; i < HASHTABLESIZE; i++){
         if (hashtable[i]){
             // if (!hashtable[i]->isEmpty()){
-                  cout << "Entry " << i << " : ";
-                hashtable[i]->printList(false); 
+                cout << "Entry " << i << " : ";
+                hashtable[i]->printList(false);
                 cout << "|" << endl;
             // }
-          
-            
+
+
         }
         else if (!hashtable[i]){
             cout << "Entry " << i << " : " << "EMPTY" << endl;
@@ -108,5 +117,4 @@ void Hashtable::printTable(){
 int Hashtable::hash(int id){
     return id % HASHTABLESIZE;
 }
-
 

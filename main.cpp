@@ -58,14 +58,44 @@ int main() {
   cout << "\n\n printing empty hash table" << endl;
   h1.printTable();
 
-  // cout << "printing one of the linked lists" << endl;
-  // h1.printList();
-
   cout << "\n\n adding nodes to hashtable" << endl;
   for (int i= 0 ; i < testdatasize; i++){
-    h1.insertEntry(ids[i],&strs[i]);
+    if(h1.insertEntry(ids[i],&strs[i])){
+      cout << "adding " << ids[i] << " : " << strs[i] << "..success" << endl;
+    }
+    else {
+      cout << "adding " << ids[i] << " : " << strs[i] << "..failed" << endl;
+    }
   }
+  cout << endl;
   h1.printTable();
+
+  cout << "\n\n getting data " << endl;
+  Data empty;
+  for (int i=0 ; i < testdatasize; i++){
+    if (h1.getData(ids[i]) != ""){
+       cout << "getting " << ids[i] << "data: " << empty.data << "..success" << endl;
+    }
+    else{
+      cout << "getting " << ids[i] << "..failed" << endl;
+    }
+  }
+
+  cout << "\n\n deleting nodes from hashtable" << endl;
+   for (int i= 0 ; i < testdatasize; i++){
+    if (h1.removeEntry(ids[i])) {
+      cout << "removing " << ids[i] << "..success" << endl;
+    }
+    else {
+      cout << "removing " << ids[i] << "..failed" << endl;
+    }
+  }
+  cout << endl;
+   h1.printTable();
+
+
+
+
 
   // cout << "adding node" << endl;
   // h1.hashtable[0].addNode(22,&str);
