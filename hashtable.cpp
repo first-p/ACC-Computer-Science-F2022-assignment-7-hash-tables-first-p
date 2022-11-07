@@ -34,14 +34,18 @@ bool Hashtable::insertEntry(int id, string *data){
 
          if (!hashtable[position]){
             hashtable[position] = new LinkedList;
-            hashtable[position]->addNode(id, data);
-            added = true;
-            count++;
+            bool success = hashtable[position]->addNode(id, data);
+            if (success){
+                added = true;
+                 count++;
+            }
          }
          else{
-            hashtable[position]->addNode(id, data);
-            added = true;
-            count++;
+            bool success = hashtable[position]->addNode(id, data);
+            if (success){
+                added = true;
+                count++;
+            }
          }
     }
     return added;
@@ -57,10 +61,22 @@ string Hashtable::getData(int id){
 
 bool Hashtable::removeEntry(int id){
     bool removed = false; 
-    int position = hash(id);
-
-    removed = hashtable[position]->deleteNode(id);
-    count --;
+    if (id > 0){
+        int position = hash(id);
+        if (hashtable[position]){
+            bool success = hashtable[position]->deleteNode(id);
+            if (success){
+                removed = true;
+                count --;
+            }
+            
+            if (hashtable[position]->isEmpty()){
+                hashtable[position] == NULL;
+                
+            }
+        }
+       
+    }
 
     return removed;
 }
@@ -72,15 +88,19 @@ int Hashtable::getCount(){
 void Hashtable::printTable(){
     for (int i = 0; i < HASHTABLESIZE; i++){
         if (hashtable[i]){
-            cout << "Entry " << i << " : ";
-            hashtable[i]->printList(false); 
-            cout << "|" << endl;
+            // if (!hashtable[i]->isEmpty()){
+                  cout << "Entry " << i << " : ";
+                hashtable[i]->printList(false); 
+                cout << "|" << endl;
+            // }
+          
             
         }
-        else{
+        else if (!hashtable[i]){
             cout << "Entry " << i << " : " << "EMPTY" << endl;
         }
     }
+    cout << "count: " << count << endl;
 }
 
 
