@@ -11,7 +11,7 @@ hash table object
 
 Hashtable::Hashtable() {
     count = 0;
-    cout << "inside constructor" << endl;
+    // cout << "inside constructor" << endl;
     for (int i = 0; i < HASHTABLESIZE; i++) {
         hashtable[i] = NULL;
     }
@@ -60,7 +60,7 @@ string Hashtable::getData(int id){
 
             bool success = hashtable[position]->getNode(id, &emptyObj);
         }
-    }// make sure id is not negative!!
+    }
 
 
 
@@ -80,7 +80,7 @@ bool Hashtable::removeEntry(int id){
             }
 
             if (hashtable[position]->isEmpty()){
-                hashtable[position] == NULL;
+                hashtable[position] = NULL;
 
             }
         }
@@ -109,7 +109,6 @@ void Hashtable::printTable(){
             cout << "Entry " << i << " : " << "EMPTY" << endl;
         }
     }
-    cout << "count: " << count << endl;
 }
 
 
