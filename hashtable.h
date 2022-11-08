@@ -37,6 +37,7 @@ private:
   int hash(int);
   int count;
   LinkedList *hashtable[HASHTABLESIZE];
+  void insert(LinkedList *, int, int, string *, bool *, int *);
 };
 
 #endif // #HASH_TABLE_H

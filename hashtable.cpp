@@ -34,22 +34,15 @@ bool Hashtable::insertEntry(int id, string *data){
 
          if (!hashtable[position]){
             hashtable[position] = new LinkedList;
-            bool success = hashtable[position]->addNode(id, data);
-            if (success){
-                added = true;
-                 count++;
-            }
          }
-         else{
-            bool success = hashtable[position]->addNode(id, data);
-            if (success){
-                added = true;
-                count++;
-            }
-         }
+        added = hashtable[position]->addNode(id, data);
+        if (added){
+            count++;
+        }
     }
-    return added;
+return added;
 }
+
 string Hashtable::getData(int id){
    Data emptyObj;
     if (id > 0) {
@@ -77,8 +70,8 @@ bool Hashtable::removeEntry(int id){
             }
 
             if (hashtable[position]->isEmpty()){
+                delete hashtable[position];
                 hashtable[position] = NULL;
-
             }
         }
     }
